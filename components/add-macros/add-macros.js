@@ -3,11 +3,12 @@ import { Formik } from 'formik';
 import React from 'react';
 import { output } from '../../src/output';
 import { Text, View } from 'react-native';
+import MacrosText from '../macros-text/macros-text';
 
 const submit = async (values) => {};
 const AddMacros = (props) => (
-  <View>
-    <Text> Macro Totals</Text>
+  <View className="p-3 mx-3 shadow-2xl rounded-b rounded-tr bg-teal-800">
+      <MacrosText>Add Macro</MacrosText>
   </View>
 );
 export default AddMacros;

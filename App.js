@@ -11,7 +11,7 @@ import TabView from './components/tab-view/tab-view';
 export default function App() {
   return (
     <View className="container mx-auto bg-teal-700">
-      <MacrosText className="text-3xl px-3 pt-3">Macro</MacrosText>
+      <MacrosText className="text-3xl p-3">Macro</MacrosText>
       <MacroTotals />
       <TabView />
     </View>

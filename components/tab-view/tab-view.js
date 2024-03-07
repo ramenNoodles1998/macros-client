@@ -1,28 +1,32 @@
-import { View, Button } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import { useState } from 'react';
 import MacroLogs from '../macro-logs/macro-logs';
 import AddMacros from '../add-macros/add-macros';
 import { output } from '../../src/output';
+import MacrosText from '../macros-text/macros-text';
 
-export default function TabView() {
+const TabView = () => {
     const [showMacroLogs, setMacroLogs] = useState('');
 
     return (
-        <View>
-            <View className="flex flex-row justify-center">
-                <Button 
+        <View className="mt-3">
+            <View className="flex flex-row justify-right">
+                <Pressable 
                     onPress={() => setMacroLogs(!showMacroLogs)}
-                    title="Logs"
-                    className="p-3 hover:bg-cyan-700 hover:text-2xl hover:text-slate-100 text-xl text-slate-500 cursor-pointer"
+                    className={'px-3 mx-3 pt-1 rounded-t ' + (showMacroLogs ? 'bg-teal-900 ' : 'bg-teal-800 ')}
                 >
-                </Button>
-                <Button 
+                    <MacrosText className="text-lg">
+                       Logs 
+                    </MacrosText>
+                </Pressable>
+                <Pressable 
                     onPress={() => setMacroLogs(!showMacroLogs)}
-                    title="Add Macros"
-                    className="p-3 hover:bg-cyan-700 hover:text-2xl hover:text-slate-100 text-xl text-slate-500 cursor-pointer"
+                    className={'px-3 pt-1 rounded-t ' + (!showMacroLogs ? 'bg-teal-900 ' : 'bg-teal-800 ')}
                 >
-                    Add Macros
-                </Button>
+                    <MacrosText className="text-lg">
+                        Macros
+                    </MacrosText>
+                </Pressable>
             </View>
             <View>
                 {showMacroLogs 
@@ -33,3 +37,5 @@ export default function TabView() {
         </View>
     );
 };
+
+export default TabView;
