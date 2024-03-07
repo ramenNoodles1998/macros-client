@@ -23,5 +23,7 @@ export const macrosSlice = createSlice({
 export const {incrementProteinByAmount, incrementCarbsByAmount, incrementFatByAmount} = macrosSlice.actions;
 
 export const selectProtein = (state) => state.macrosSliceReducer.protein;
+export const selectCarbs = (state) => state.macrosSliceReducer.carbs;
+export const selectFat = (state) => state.macrosSliceReducer.fat;
 
 export default macrosSlice.reducer;

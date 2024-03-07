@@ -6,10 +6,6 @@ import MacrosText from './components/macro-components/macro-text';
 import MacroTotals from './components/macro-totals';
 import TabView from './components/tab-view';
 
-
-//Totals with percentages.
-//pagination for logs, and (form and food items.).
-
 const App = () => {
   return (
     <View className="container mx-auto bg-teal-700">

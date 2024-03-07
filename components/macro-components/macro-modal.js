@@ -1,29 +1,43 @@
 import {Modal, View, Text, Pressable} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux';
-import { incrementProteinByAmount, selectProtein } from '../../feature/macro-slice';
+import { incrementProteinByAmount, incrementCarbsByAmount, incrementFatByAmount, selectProtein, selectCarbs, selectFat } from '../../feature/macro-slice';
 
 const MacroModal = (props) => {
-  const protein = useSelector(selectProtein);
+  let selector;
+  let incrementFunction;
   const dispatch = useDispatch();
-    return (
-      <Modal
-        animationType="slide"
-        visible={props.modalVisible}
-        onRequestClose={() => setModalVisible(!props.modalVisible)}>
+
+  if(props.modalType === 'protein') {
+    selector = useSelector(selectProtein);
+    incrementFunction = incrementProteinByAmount
+  } else if (props.modalType === 'carbs') {
+    selector = useSelector(selectCarbs);
+    incrementFunction = incrementCarbsByAmount
+  } else {
+    selector = useSelector(selectFat);
+    incrementFunction = incrementFatByAmount
+  }
+
+  console.log(props)
+  return (
+    <Modal
+      animationType="slide"
+      visible={props.modalVisible}
+      onRequestClose={() => setModalVisible(!props.modalVisible)}>
+      <View>
         <View>
-          <View>
-            <Pressable onPress={() => dispatch(incrementProteinByAmount(10))}>
-                <Text>add protein</Text>
-            </Pressable>
-            <Text>{protein}</Text>
-            <Pressable
-              onPress={() => props.setModalVisible(!props.modalVisible)}>
-              <Text>Hide Modal</Text>
-            </Pressable>
-          </View>
+          <Pressable onPress={() => dispatch(incrementFunction(10))}>
+              <Text>add {props.modalType}</Text>
+          </Pressable>
+          <Text>{selector}</Text>
+          <Pressable
+            onPress={() => props.setModalVisible(!props.modalVisible)}>
+            <Text>Hide Modal</Text>
+          </Pressable>
         </View>
-      </Modal>
-    );
+      </View>
+    </Modal>
+  );
 };
 
 export default MacroModal;
