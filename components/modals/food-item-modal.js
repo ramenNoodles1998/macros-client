@@ -13,8 +13,8 @@ const FoodItemModal = (props) => {
   const [fat, onChangeFat] = useState('');
   const [serving, onChangeServing] = useState('');
 
-  const addMacro = async () => {
-    await dispatch(addFoodItemAsync({name, protein: Number(protein), carbs: Number(carbs), fat: Number(fat), serving}));
+  const addMacro = () => {
+    dispatch(addFoodItemAsync({name, protein: Number(protein), carbs: Number(carbs), fat: Number(fat), serving}));
     onChangeName('');
     onChangeProtein('');
     onChangeCarbs('');

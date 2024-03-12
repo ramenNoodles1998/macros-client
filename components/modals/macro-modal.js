@@ -7,7 +7,6 @@ import { output } from '../../src/output';
 
 const MacroModal = (props) => {
   let incrementFunction;
-  console.log(props)
   const dispatch = useDispatch();
   const [macros, onChangeMacros] = useState('');
   const addMacro = async () => {
