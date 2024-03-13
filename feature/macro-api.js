@@ -3,8 +3,8 @@ import axios from 'axios';
 export async function AddMacroLog(macros) {
   try {
     await axios.post('http://localhost:3030/api/save-macro-log', macros);
-  } catch(e) {
-    console.warn(e)
+  } catch (e) {
+    console.warn(e);
   }
 }
 
@@ -15,10 +15,10 @@ export async function AddFoodItem(foodItem) {
     //TODO: get user id.
     return await axios.post('http://localhost:3030/api/save-food-item', {
       id: '123123',
-      ...foodItem
+      ...foodItem,
     });
-  } catch(e) {
-    console.warn(e)
+  } catch (e) {
+    console.warn(e);
     return;
   }
 }
@@ -28,22 +28,28 @@ export async function DeleteFoodItem(foodItem) {
   try {
     return await axios.post('http://localhost:3030/api/delete-food-item', {
       id: '123123',
-      ...foodItem
+      ...foodItem,
     });
-  } catch(e) {
-    console.warn(e)
+  } catch (e) {
+    console.warn(e);
     return;
   }
-
 }
-
 
 export async function GetFoodItems() {
   try {
     //TODO: get user id.
     return await axios.get('http://localhost:3030/api/get-food-items');
-  } catch(e) {
-    console.warn(e)
+  } catch (e) {
+    console.warn(e);
     return;
+  }
+}
+
+export async function GetFoodLogs() {
+  try {
+    return await axios.get('http://localhost:3030/api/get-macro-logs');
+  } catch (e) {
+    console.warn(e);
   }
 }

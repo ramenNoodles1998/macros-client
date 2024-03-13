@@ -3,7 +3,9 @@ import { output } from '../../src/output';
 
 const MacroText = (props) => {
   return (
-    <Text className="text-white font-sans font-extralight" style={props.style}>{props.children}</Text>
+    <Text className='text-white font-sans font-extralight' style={props.style}>
+      {props.children}
+    </Text>
   );
 };
 
