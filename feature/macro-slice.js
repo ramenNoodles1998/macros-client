@@ -5,6 +5,8 @@ import {
   GetFoodItems,
   DeleteFoodItem,
   GetFoodLogs,
+  DeleteFoodLog,
+  SaveFoodLog
 } from './macro-api';
 
 export const incrementProteinByAmountAsync = createAsyncThunk(
@@ -61,10 +63,26 @@ export const deleteFoodItemAsync = createAsyncThunk(
 export const getFoodLogsAsync = createAsyncThunk(
   'macros/getFoodLogs',
   async (id, { dispatch }) => {
-    console.log('here');
     let response = await GetFoodLogs();
-    console.log(response);
     dispatch(addFoodLogs(response.data));
+  }
+);
+
+export const deleteFoodLogAsync = createAsyncThunk(
+  'macros/deleteFoodLog',
+  async (log, { dispatch }) => {
+    let response = await DeleteFoodLog(log);
+    console.log(response);
+    dispatch(deleteFoodLog(response.data));
+  }
+);
+
+export const editFoodLogAsync = createAsyncThunk(
+  'macros/editFoodLog',
+  async (log, { dispatch }) => {
+    let response = await SaveFoodLog(log);
+    console.log(response);
+    dispatch(editFoodLog(response.data));
   }
 );
 
@@ -101,6 +119,15 @@ export const macrosSlice = createSlice({
     addFoodLogs: (state, action) => {
       state.foodLogs = action.payload;
     },
+    deleteFoodLog: (state, action) => {
+      state.foodLogs = state.foodLogs.filter(
+        (fi) => fi.date !== action.payload.date
+      );
+    },
+    editFoodLog: (state, action) => {
+      const index = state.foodLogs.findIndex((fl) => action.payload.date === fl.date);
+      state.foodLogs.splice(index, 1, action.payload);
+    }
   },
 });
 
@@ -112,6 +139,8 @@ export const {
   addFoodItems,
   deleteFoodItem,
   addFoodLogs,
+  deleteFoodLog,
+  editFoodLog,
 } = macrosSlice.actions;
 
 export const selectProtein = (state) => state.macrosSliceReducer.protein;

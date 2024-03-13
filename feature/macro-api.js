@@ -53,3 +53,25 @@ export async function GetFoodLogs() {
     console.warn(e);
   }
 }
+
+export async function DeleteFoodLog(log) {
+  try {
+    return await axios.post('http://localhost:3030/api/delete-macro-log', {
+      id: '123123',
+      ...log
+    });
+  } catch (e) {
+    console.warn(e);
+  }
+}
+
+export async function SaveFoodLog(log) {
+  try {
+    return await axios.post('http://localhost:3030/api/save-macro-log', {
+      id: '123123',
+      ...log
+    });
+  } catch (e) {
+    console.warn(e);
+  }
+}
