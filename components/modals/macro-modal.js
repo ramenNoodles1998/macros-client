@@ -1,34 +1,22 @@
 import { Modal, View, TextInput, Pressable } from 'react-native';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  incrementProteinByAmountAsync,
-  incrementCarbsByAmountAsync,
-  incrementFatByAmountAsync,
-  selectProtein,
-  selectCarbs,
-  selectFat,
+  selectDailyMacroTotals,
+  saveDailyMacroTotalAsync,
 } from '../../feature/macro-slice';
 import MacroText from '../macro-components/macro-text';
 import { output } from '../../src/output';
 
 const MacroModal = (props) => {
-  let incrementFunction;
   const dispatch = useDispatch();
+  const macroTotals = useSelector(selectDailyMacroTotals);
   const [macros, onChangeMacros] = useState('');
   const addMacro = async () => {
-    await dispatch(incrementFunction(Number(macros)));
+    await dispatch(saveDailyMacroTotalAsync({...macroTotals, [props.modalType]: macroTotals[props.modalType] + Number(macros)}));
     onChangeMacros('');
     props.setModalVisible(!props.modalVisible);
   };
-
-  if (props.modalType === 'protein') {
-    incrementFunction = incrementProteinByAmountAsync;
-  } else if (props.modalType === 'carbs') {
-    incrementFunction = incrementCarbsByAmountAsync;
-  } else {
-    incrementFunction = incrementFatByAmountAsync;
-  }
 
   //TODO: set click off modal as close.
   return (

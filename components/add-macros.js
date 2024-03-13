@@ -1,38 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { View, FlatList, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { View, Pressable } from 'react-native';
 import MacroModal from './modals/macro-modal';
 import MacroText from './macro-components/macro-text';
-import {
-  selectFoodItems,
-  getFoodItemsAsync,
-  deleteFoodItemAsync,
-  addFoodItemAsync,
-} from '../feature/macro-slice';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { output } from '../src/output';
 import FoodItemModal from './modals/food-item-modal';
+import FoodItemTable from './food-item-table';
 
 const AddMacros = (props) => {
-  const foodItems = useSelector(selectFoodItems);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getFoodItemsAsync('123'));
-  }, []);
-
   const [macroModalVisible, setMacroModalVisible] = useState(false);
   const [foodItemModalVisible, setFoodItemModalVisible] = useState(false);
   const [modalType, setModalType] = useState('');
   const openModal = async (value) => {
     setModalType(value);
     setMacroModalVisible(true);
-  };
-  const deleteFoodItem = (item) => {
-    dispatch(deleteFoodItemAsync(item));
-  };
-  const addFoodItem = (item) => {
-    // dispatch(addFoodItemAsync(item));
-    //TODO: add addDailyMacros
-    console.log('needs implementation');
   };
 
   return (
@@ -76,25 +57,7 @@ const AddMacros = (props) => {
           <MacroText>Add New Food</MacroText>
         </Pressable>
       </View>
-      <View>
-        <FlatList
-          data={foodItems}
-          renderItem={({ item }) => (
-            <View>
-              <MacroText>{item.name}</MacroText>
-              <Pressable onPress={() => deleteFoodItem(item)}>
-                <MacroText className='p-2 bg-teal-900 rounded'>
-                  Delete
-                </MacroText>
-              </Pressable>
-              <Pressable onPress={() => addFoodItem(item)}>
-                <MacroText className='p-2 bg-teal-900 rounded'>Add</MacroText>
-              </Pressable>
-            </View>
-          )}
-          keyExtractor={(fi) => fi.name}
-        />
-      </View>
+      <FoodItemTable/>
     </View>
   );
 };

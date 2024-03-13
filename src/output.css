@@ -560,6 +560,22 @@ video {
   visibility: visible;
 }
 
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+.col-span-12 {
+  grid-column: span 12 / span 12;
+}
+
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.col-span-4 {
+  grid-column: span 4 / span 4;
+}
+
 .m-1 {
   margin: 0.25rem;
 }
@@ -608,12 +624,36 @@ video {
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
 
+.grid {
+  display: grid;
+}
+
 .w-full {
   width: 100%;
+}
+
+.min-w-full {
+  min-width: 100%;
+}
+
+.grid-flow-row {
+  grid-auto-flow: row;
+}
+
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -648,6 +688,18 @@ video {
   align-self: center;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -672,6 +724,10 @@ video {
 
 .border-0 {
   border-width: 0px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
 }
 
 .bg-teal-500 {
@@ -726,6 +782,21 @@ video {
   padding-bottom: 0.375rem;
 }
 
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .pb-3 {
   padding-bottom: 0.75rem;
 }
@@ -740,6 +811,10 @@ video {
 
 .pt-1 {
   padding-top: 0.25rem;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-center {
@@ -760,8 +835,21 @@ video {
   line-height: 1.75rem;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .font-extralight {
   font-weight: 200;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-medium {
+  font-weight: 500;
 }
 
 .text-white {
@@ -815,7 +903,24 @@ video {
   --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
 }
 
+@media (prefers-color-scheme: dark) {
+  .dark\:border-neutral-500 {
+    --tw-border-opacity: 1;
+    border-color: rgb(115 115 115 / var(--tw-border-opacity));
+  }
+}
+
 @media (min-width: 640px) {
+  .sm\:-mx-6 {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -823,5 +928,17 @@ video {
 
   .sm\:leading-6 {
     line-height: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:-mx-8 {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+
+  .lg\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }

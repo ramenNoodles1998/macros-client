@@ -9,8 +9,6 @@ export async function AddMacroLog(macros) {
 }
 
 export async function AddFoodItem(foodItem) {
-  //TODO: have go backend send json in camelcase.
-  //then add to list after successful api call.
   try {
     //TODO: get user id.
     return await axios.post('http://localhost:3030/api/save-food-item', {
@@ -24,7 +22,6 @@ export async function AddFoodItem(foodItem) {
 }
 
 export async function DeleteFoodItem(foodItem) {
-  console.log(foodItem);
   try {
     return await axios.post('http://localhost:3030/api/delete-food-item', {
       id: '123123',
@@ -38,7 +35,6 @@ export async function DeleteFoodItem(foodItem) {
 
 export async function GetFoodItems() {
   try {
-    //TODO: get user id.
     return await axios.get('http://localhost:3030/api/get-food-items');
   } catch (e) {
     console.warn(e);
@@ -71,6 +67,25 @@ export async function SaveFoodLog(log) {
       id: '123123',
       ...log
     });
+  } catch (e) {
+    console.warn(e);
+  }
+}
+
+export async function SaveDailyMacroTotal(macro) {
+  try {
+    return await axios.post('http://localhost:3030/api/save-daily-macro-total', {
+      ...macro
+    });
+  } catch (e) {
+    console.warn(e);
+  }
+}
+
+
+export async function GetDailyMacroTotal() {
+  try {
+    return await axios.get('http://localhost:3030/api/get-daily-macro-total');
   } catch (e) {
     console.warn(e);
   }
