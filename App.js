@@ -10,7 +10,10 @@ const App = () => {
   return (
     <View className='container mx-auto bg-teal-700'>
       <Provider store={store}>
-        <MacrosText className='text-3xl p-3'>Macro</MacrosText>
+        <View className='flex flex-row justify-between'>
+          <MacrosText className='text-3xl p-3'>Macro</MacrosText>
+          <MacrosText className='text-lg p-3'>Nutrition Profile</MacrosText>
+        </View>
         <MacroTotals />
         <TabView />
       </Provider>

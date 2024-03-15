@@ -24,7 +24,7 @@ const AddMacros = (props) => {
         modalVisible={macroModalVisible}
       ></MacroModal>
       <FoodItemModal
-        modalType={modalType}
+        isEdit={false}
         setModalVisible={setFoodItemModalVisible}
         modalVisible={foodItemModalVisible}
       ></FoodItemModal>
@@ -49,7 +49,7 @@ const AddMacros = (props) => {
         </Pressable>
       </View>
       <View className='flex flex-row justify-between m-1 my-3'>
-        <MacroText className='text-lg'>Quick Add Food</MacroText>
+        <MacroText className='text-lg'>Saved Food Items</MacroText>
         <Pressable
           className='p-2 bg-teal-900 rounded'
           onPress={() => setFoodItemModalVisible(true)}

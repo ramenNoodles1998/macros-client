@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectDailyMacroTotals,
   saveDailyMacroTotalAsync,
+  editFoodLogAsync,
 } from '../../feature/macro-slice';
 import MacroText from '../macro-components/macro-text';
 import { output } from '../../src/output';
@@ -14,6 +15,7 @@ const MacroModal = (props) => {
   const [macros, onChangeMacros] = useState('');
   const addMacro = async () => {
     await dispatch(saveDailyMacroTotalAsync({...macroTotals, [props.modalType]: macroTotals[props.modalType] + Number(macros)}));
+    await dispatch(editFoodLogAsync({ protein: 0, carbs: 0, fat: 0, [props.modalType]:Number(macros) }));
     onChangeMacros('');
     props.setModalVisible(!props.modalVisible);
   };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MacroText from './macro-components/macro-text';
 import {
   selectFoodItems,
@@ -8,8 +8,17 @@ import {
   selectDailyMacroTotals,
 } from '../feature/macro-slice';
 import { View, FlatList, Pressable } from 'react-native';
+import FoodItemModal from './modals/food-item-modal';
 import { useDispatch, useSelector } from 'react-redux';
 const FoodItemTable = () => {
+  const [macro, setMacro] = useState({
+    name: '',
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    serving: '' 
+  });
+  const [foodItemModalVisible, setFoodItemModalVisible] = useState(false);
   const foodItems = useSelector(selectFoodItems);
   const macroTotals = useSelector(selectDailyMacroTotals);
   const dispatch = useDispatch();
@@ -32,41 +41,37 @@ const FoodItemTable = () => {
       })
     );
   };
+
+  const openModal = async (item) => {
+    setMacro({...item});
+    setFoodItemModalVisible(true);
+  };
+
   return (
     <View>
-      <View className='grid grid-flow-row grid-cols-12'>
-        <View className='col-span-3'>
-          <MacroText>Name</MacroText>
-        </View>
-        <View className='col-span-2'>
-          <MacroText>Protein</MacroText>
-        </View>
-        <View className='col-span-2'>
-          <MacroText>Carbs</MacroText>
-        </View>
-        <View className='col-span-2'>
-          <MacroText>Fat</MacroText>
-        </View>
-        <View className='col-span-3'>
-          <MacroText>Actions</MacroText>
-        </View>
-      </View>
+      <FoodItemModal
+        isEdit={true}
+        macro={macro}
+        setModalVisible={setFoodItemModalVisible}
+        modalVisible={foodItemModalVisible}
+      ></FoodItemModal>
       <FlatList
         data={foodItems}
-        renderItem={({ item }) => (
-          <View className='grid grid-flow-row grid-cols-12'>
-            <MacroText className='col-span-3'>{item.name}</MacroText>
-            <MacroText className='col-span-2'>{item.protein}</MacroText>
-            <MacroText className='col-span-2'>{item.carbs}</MacroText>
-            <MacroText className='col-span-2'>{item.fat}</MacroText>
-            <View className='col-span-3'>
-                <Pressable onPress={() => deleteFoodItem(item)}>
-                    <MacroText className='p-2 bg-teal-900 rounded'>Delete</MacroText>
-                </Pressable>
-                <Pressable onPress={() => addFoodItem(item)}>
-                    <MacroText className='p-2 bg-teal-900 rounded'>Add</MacroText>
-                </Pressable>
-            </View>
+        renderItem={({ item, index }) => (
+          <View className={ 'grid grid-flow-row grid-cols-12 justify-items-center m-2 p-1 rounded '+ (index % 2 == 0 ? 'bg-teal-900' : 'bg-teal-800')}>
+            <MacroText className='col-span-3 row-span-3 text-lg'>{item.name}</MacroText>
+            <MacroText className='col-span-5 text-center'>{item.protein}g protein</MacroText>
+            <Pressable className='col-span-4' onPress={() => addFoodItem(item)}>
+                <MacroText className={ 'm-1 p-1 rounded ' + (index % 2 == 0 ? 'bg-teal-800' : 'bg-teal-900')}>Quick Add</MacroText>
+            </Pressable>
+            <MacroText className='col-start-4 col-end-9 text-center'>{item.carbs}g carbs</MacroText>
+            <Pressable className='col-start-9 col-end-12' onPress={() => openModal(item)}>
+                <MacroText className={ 'm-1 p-1 rounded ' + (index % 2 == 0 ? 'bg-teal-800' : 'bg-teal-900')}>Edit</MacroText>
+            </Pressable>
+            <MacroText className='col-start-4 col-end-9 text-center'>{item.fat}g fat</MacroText>
+            <Pressable className='col-start-10 col-end-12' onPress={() => deleteFoodItem(item)}>
+                <MacroText className={ 'm-1 p-1 rounded ' + (index % 2 == 0 ? 'bg-teal-800' : 'bg-teal-900')}>Delete</MacroText>
+            </Pressable>
           </View>
         )}
         keyExtractor={(fi) => fi.name}
@@ -74,5 +79,9 @@ const FoodItemTable = () => {
     </View>
   );
 };
+//TODO next layout
+//name
+// p c f //macros listed
+// actions
 
 export default FoodItemTable;

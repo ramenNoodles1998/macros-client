@@ -54,6 +54,7 @@ export const deleteFoodLogAsync = createAsyncThunk(
 export const editFoodLogAsync = createAsyncThunk(
   'macros/editFoodLog',
   async (log, { dispatch }) => {
+    console.log(log);
     let response = await SaveFoodLog(log);
     dispatch(editFoodLog(response.data));
   }
@@ -71,6 +72,7 @@ export const getDailyMacroTotalAsync = createAsyncThunk(
   'macros/getDailyMacroTotal',
   async (id, { dispatch }) => {
     let response = await GetDailyMacroTotal();
+    console.log(response.data)
     dispatch(saveDailyMacroTotal(response.data));
   }
 );

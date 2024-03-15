@@ -1,19 +1,44 @@
 import { Modal, View, TextInput, Pressable } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFoodItemAsync } from '../../feature/macro-slice';
+import { addFoodItemAsync, deleteFoodItemAsync } from '../../feature/macro-slice';
 import MacroText from '../macro-components/macro-text';
 import { output } from '../../src/output';
 
 const FoodItemModal = (props) => {
   const dispatch = useDispatch();
   const [name, onChangeName] = useState('');
+  const [ogName, setOgName] = useState('');
   const [protein, onChangeProtein] = useState('');
   const [carbs, onChangeCarbs] = useState('');
   const [fat, onChangeFat] = useState('');
   const [serving, onChangeServing] = useState('');
 
+  useEffect(() => {
+    if(props.isEdit) {
+      setOgName(props.macro.name);
+      onChangeName(props.macro.name);
+      onChangeProtein(props.macro.protein);
+      onChangeCarbs(props.macro.carbs);
+      onChangeFat(props.macro.fat);
+      onChangeServing(props.macro.serving);
+    }
+  }, [props.modalVisible]);
+
+
   const addMacro = () => {
+    if(props.isEdit) {
+      dispatch(
+        deleteFoodItemAsync({
+          name: ogName,
+          protein: Number(protein),
+          carbs: Number(carbs),
+          fat: Number(fat),
+          serving,
+        })
+      );
+    }
+
     dispatch(
       addFoodItemAsync({
         name,
@@ -89,7 +114,7 @@ const FoodItemModal = (props) => {
             onPress={() => addMacro()}
             className='p-2 m-2 bg-teal-900 rounded'
           >
-            <MacroText className='text-center'>Add</MacroText>
+            <MacroText className='text-center'>{props.isEdit ? 'Edit' : 'Add'}</MacroText>
           </Pressable>
         </View>
       </View>
