@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Pressable } from 'react-native';
 import { useState } from 'react';
 import MacroLogs from './macro-logs';
 import AddMacros from './add-macros';

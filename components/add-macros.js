@@ -57,7 +57,7 @@ const AddMacros = (props) => {
           <MacroText>Add New Food</MacroText>
         </Pressable>
       </View>
-      <FoodItemTable/>
+      <FoodItemTable />
     </View>
   );
 };

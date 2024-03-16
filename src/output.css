@@ -560,10 +560,6 @@ video {
   visibility: visible;
 }
 
-.col-span-12 {
-  grid-column: span 12 / span 12;
-}
-
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -572,68 +568,36 @@ video {
   grid-column: span 3 / span 3;
 }
 
-.col-span-1 {
-  grid-column: span 1 / span 1;
+.col-span-4 {
+  grid-column: span 4 / span 4;
 }
 
 .col-span-5 {
   grid-column: span 5 / span 5;
 }
 
-.col-span-4 {
-  grid-column: span 4 / span 4;
-}
-
-.col-start-5 {
-  grid-column-start: 5;
-}
-
-.col-start-6 {
-  grid-column-start: 6;
-}
-
 .col-start-10 {
   grid-column-start: 10;
-}
-
-.col-start-9 {
-  grid-column-start: 9;
 }
 
 .col-start-4 {
   grid-column-start: 4;
 }
 
-.col-start-3 {
-  grid-column-start: 3;
-}
-
-.col-end-9 {
-  grid-column-end: 9;
+.col-start-9 {
+  grid-column-start: 9;
 }
 
 .col-end-12 {
   grid-column-end: 12;
 }
 
-.col-end-8 {
-  grid-column-end: 8;
-}
-
-.col-end-13 {
-  grid-column-end: 13;
-}
-
-.row-span-2 {
-  grid-row: span 2 / span 2;
+.col-end-9 {
+  grid-column-end: 9;
 }
 
 .row-span-3 {
   grid-row: span 3 / span 3;
-}
-
-.row-start-5 {
-  grid-row-start: 5;
 }
 
 .m-1 {
@@ -706,10 +670,6 @@ video {
 
 .grid-cols-9 {
   grid-template-columns: repeat(9, minmax(0, 1fr));
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -842,22 +802,6 @@ video {
   padding-top: 0.25rem;
 }
 
-.pl-2 {
-  padding-left: 0.5rem;
-}
-
-.pl-3 {
-  padding-left: 0.75rem;
-}
-
-.pr-3 {
-  padding-right: 0.75rem;
-}
-
-.text-left {
-  text-align: left;
-}
-
 .text-center {
   text-align: center;
 }
@@ -873,11 +817,6 @@ video {
 
 .text-lg {
   font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
   line-height: 1.75rem;
 }
 
@@ -919,31 +858,6 @@ video {
 .placeholder\:text-gray-300::placeholder {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-
-.odd\:bg-teal-900:nth-child(odd) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(19 78 74 / var(--tw-bg-opacity));
-}
-
-.odd\:bg-teal-800:nth-child(odd) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 94 89 / var(--tw-bg-opacity));
-}
-
-.even\:bg-teal-700:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 118 110 / var(--tw-bg-opacity));
-}
-
-.even\:bg-teal-800:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 94 89 / var(--tw-bg-opacity));
-}
-
-.even\:bg-red-800:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(153 27 27 / var(--tw-bg-opacity));
 }
 
 .focus\:ring-2:focus {

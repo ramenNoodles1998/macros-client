@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { View, FlatList, Pressable } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import MacroText from './macro-components/macro-text';
-import { editFoodLogAsync, getFoodLogsAsync, selectFoodLogs, deleteFoodLogAsync, selectDailyMacroTotals } from '../feature/macro-slice';
+import {
+  saveFoodLogAsync,
+  getFoodLogsAsync,
+  selectFoodLogs,
+  deleteFoodLogAsync,
+  selectDailyMacroTotals,
+  removeDailyMacroTotal,
+  addDailyMacroTotal,
+} from '../feature/macro-slice';
+import { output } from '../src/output';
 
 const MacroLogs = () => {
   const foodLogs = useSelector(selectFoodLogs);
@@ -13,13 +22,14 @@ const MacroLogs = () => {
   }, []);
 
   const deleteFoodLog = (log) => {
-    //todo: SHOULD EFFECT DAILY MACRO TOTAL. Potentially just count up logs. so we dont have 2 sources of truth.
+    dispatch(removeDailyMacroTotal(log));
     dispatch(deleteFoodLogAsync(log));
-  }
+  };
 
-  const editFoodLog = (log) => {
-    dispatch(editFoodLogAsync(log));
-  }
+  const saveFoodLog = (log) => {
+    dispatch(addDailyMacroTotal(log));
+    dispatch(saveFoodLogAsync(log));
+  };
 
   return (
     <View className='p-3 mx-3 shadow-2xl rounded-b bg-teal-800'>
@@ -53,7 +63,8 @@ const MacroLogs = () => {
               <Pressable onPress={() => deleteFoodLog(item)}>
                 <MacroText>Delete</MacroText>
               </Pressable>
-              <Pressable onPress={() => editFoodLog(item)}>
+              {/* TODO: doesnt work should open modal. */}
+              <Pressable onPress={() => saveFoodLog(item)}>
                 <MacroText>Edit</MacroText>
               </Pressable>
             </View>

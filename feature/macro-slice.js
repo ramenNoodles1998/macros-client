@@ -51,20 +51,11 @@ export const deleteFoodLogAsync = createAsyncThunk(
   }
 );
 
-export const editFoodLogAsync = createAsyncThunk(
-  'macros/editFoodLog',
+export const saveFoodLogAsync = createAsyncThunk(
+  'macros/saveFoodLog',
   async (log, { dispatch }) => {
-    console.log(log);
     let response = await SaveFoodLog(log);
-    dispatch(editFoodLog(response.data));
-  }
-);
-
-export const saveDailyMacroTotalAsync = createAsyncThunk(
-  'macros/saveDailyMacroTotal',
-  async (macro, { dispatch }) => {
-    let response = await SaveDailyMacroTotal(macro);
-    dispatch(saveDailyMacroTotal(response.data));
+    dispatch(saveFoodLog(response.data));
   }
 );
 
@@ -72,7 +63,6 @@ export const getDailyMacroTotalAsync = createAsyncThunk(
   'macros/getDailyMacroTotal',
   async (id, { dispatch }) => {
     let response = await GetDailyMacroTotal();
-    console.log(response.data)
     dispatch(saveDailyMacroTotal(response.data));
   }
 );
@@ -109,11 +99,18 @@ export const macrosSlice = createSlice({
         (fi) => fi.date !== action.payload.date
       );
     },
-    editFoodLog: (state, action) => {
+    saveFoodLog: (state, action) => {
       const index = state.foodLogs.findIndex(
         (fl) => action.payload.date === fl.date
       );
       state.foodLogs.splice(index, 1, action.payload);
+    },
+    removeDailyMacroTotal: (state, action) => {
+      state.dailyMacroTotals = {
+        protein: state.dailyMacroTotals.protein - action.payload.protein,
+        carbs: state.dailyMacroTotals.carbs - action.payload.carbs,
+        fat: state.dailyMacroTotals.fat - action.payload.fat,
+      };
     },
     saveDailyMacroTotal: (state, action) => {
       state.dailyMacroTotals = action.payload;
@@ -134,8 +131,9 @@ export const {
   deleteFoodItem,
   addFoodLogs,
   deleteFoodLog,
-  editFoodLog,
+  saveFoodLog,
   saveDailyMacroTotal,
+  removeDailyMacroTotal,
   addDailyMacroTotal,
 } = macrosSlice.actions;
 

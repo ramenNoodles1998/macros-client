@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { output } from '../src/output';
 import {
+  addDailyMacroTotal,
   getDailyMacroTotalAsync,
   selectDailyMacroTotals,
 } from '../feature/macro-slice';

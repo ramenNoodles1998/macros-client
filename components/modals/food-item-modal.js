@@ -1,6 +1,6 @@
 import { Modal, View, TextInput, Pressable } from 'react-native';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addFoodItemAsync, deleteFoodItemAsync } from '../../feature/macro-slice';
 import MacroText from '../macro-components/macro-text';
 import { output } from '../../src/output';
